@@ -1,0 +1,16 @@
+main{
+    display:flex;
+    flex-direction: column;
+    gap:20px;
+}
+
+.giftsContainer{
+    background-color: rgb(236, 197, 197);
+    border:1px solid white;
+    text-align: center;
+    padding:40px;
+}
+
+li{
+    list-style: none;
+}
