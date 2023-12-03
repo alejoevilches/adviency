@@ -3,6 +3,21 @@
     padding:0;
 }
 
+@font-face {
+    font-family: "Titles";
+    src: url(/fonts/IndieFlower-Regular.ttf);
+}
+
+@font-face {
+    font-family: "Items";
+    src: url(/fonts/Dosis-VariableFont_wght.ttf);
+}
+
+:root{
+    --title-font:"Titles";
+    --items-font:"Items"
+}
+
 body{
     display:flex;
     align-items: center;
