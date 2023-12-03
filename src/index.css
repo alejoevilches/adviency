@@ -19,5 +19,7 @@
 }
 
 body{
-
+    height:100vh;
+    background-image: url(/public/background.avif);
+    background-size: cover;
 }
