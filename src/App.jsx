@@ -1,16 +1,15 @@
 import { useState } from "react"
-import "./App.css"
 
 export function App(){
-    const [gifts, setGifts]=useState(["Camiseta de River", "Camperón de River", "Piluso de River"])
-    return (
+    const [gifts, setGifts]=useState(["Remera de River", "Campera de River", "Gorra de River"]);
+    return(
         <main>
             <h1>Regalos</h1>
             <ul>
-                {gifts.map((el)=>{
-                    return (
+                {gifts.map(el=>{
+                    return(
                         <li key={el}>
-                            {el}
+                            <p>{el}</p>
                         </li>
                     )
                 })}
