@@ -27,10 +27,26 @@ main{
 }
 
 .giftsContainer li{
-    list-style:url(/public/icon.png);
+    list-style-image:url(/public/icon.png);
     font-family: var(--items-font);
     padding:5px 0;
     font-size: 1.5em;
+}
+
+article{
+    display:flex;
+    width:250px;
+    justify-content: space-between;
+}
+
+article > button:hover {
+    color:red;
+}
+
+.deleteButton{
+    background-color: transparent;
+    border:none;
+    margin-left:20px;
 }
 
 form{
