@@ -4,8 +4,13 @@ import { IconTrash } from "@tabler/icons-react";
 
 export function App(){
     const [gifts, setGifts]=useState([]);
+    const handleDelete=(e)=>{
+        e.preventDefault();
+        console.log(e.target.id);
+    }
     const handleSubmit=(e)=>{
         e.preventDefault();
+        console.log(e);
         const gift=e.target[0].value;
         const newGiftList=[...gifts, gift];
         setGifts(newGiftList);
@@ -21,7 +26,7 @@ export function App(){
                                 <li key={el}>
                                     <p>{el}</p>
                                 </li>
-                            <button className="deleteButton"><IconTrash /></button>
+                                <button id={el} className="deleteButton" onClick={handleDelete}><IconTrash /></button>
                             </article>
                         )
                     })}
