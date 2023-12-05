@@ -49,6 +49,18 @@ article > button:hover {
     margin-left:20px;
 }
 
+.deleteAllButton{
+    margin-bottom:10px;
+}
+
+.deleteAllButton::before{
+  background: linear-gradient(
+    82.3deg,
+    #780b0f,
+    #bb0c12
+  );
+}
+
 form{
     display: flex;
     gap:10px;

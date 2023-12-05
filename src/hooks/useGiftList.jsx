@@ -12,5 +12,8 @@ export const useGiftList=()=>{
         newGiftList.splice(i,1);
         setGiftList(newGiftList);
     }
-    return {giftList, addToGiftList, removeFromGiftList}
+    const deleteGiftList=()=>{
+        setGiftList([]);
+    }
+    return {giftList, addToGiftList, removeFromGiftList, deleteGiftList}
 }

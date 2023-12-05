@@ -3,11 +3,12 @@ import { useGiftList } from "./hooks/useGiftList";
 import { IconTrash } from "@tabler/icons-react";
 
 export function App(){
-    const {giftList, addToGiftList, removeFromGiftList}=useGiftList();
+    const {giftList, addToGiftList, removeFromGiftList, deleteGiftList}=useGiftList();
     const handleSubmit=(e)=>{
         e.preventDefault();
         const gift=e.target[0].value;
         addToGiftList(gift);
+        e.target[0].value="";
     }
     return (
         <main>
@@ -31,6 +32,10 @@ export function App(){
                         <span className="button-content">Agregar</span>
                     </button>
                 </form>
+                {giftList.length>0 && 
+                <button className="button deleteAllButton" onClick={()=>deleteGiftList()}>
+                    <span className="button-content">Eliminar todo</span>
+                </button>}
             </section>
         </main>
     )
