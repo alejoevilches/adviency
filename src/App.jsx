@@ -1,8 +1,9 @@
 import "./App.css";
 import { useGiftList } from "./hooks/useGiftList";
+import { IconTrash } from "@tabler/icons-react";
 
 export function App(){
-    const {giftList, addToGiftList, removeFromGiftlist}=useGiftList();
+    const {giftList, addToGiftList, removeFromGiftList}=useGiftList();
     const handleSubmit=(e)=>{
         e.preventDefault();
         const gift=e.target[0].value;
@@ -13,7 +14,16 @@ export function App(){
             <section className="giftsContainer">
                 <h1>Regalos</h1>
                 <ul>
-                    
+                    {giftList.map(el=>{
+                        return (
+                            <article key={el}>
+                                <li>
+                                    <p>{el}</p>
+                                </li>
+                                <button className="deleteButton" onClick={()=>removeFromGiftList(el)}><IconTrash/></button>
+                            </article>
+                        )
+                    })}
                 </ul>
                 <form onSubmit={handleSubmit}>
                     <input type="text" placeholder="Ingresá tu regalo" />
