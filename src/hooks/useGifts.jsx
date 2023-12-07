@@ -1,7 +1,7 @@
 import { useState } from "react"
 
 export const useGifts=()=>{
-    const [gifts, setGifts]=useState(["Hola", "Regalo"])
+    const [gifts, setGifts]=useState([])
 
     const addGift=(el)=>{
         const newGiftList=[...gifts, el];

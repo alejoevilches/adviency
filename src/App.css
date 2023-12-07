@@ -72,3 +72,9 @@ form input{
     border:none;
     padding-left:10px;
 }
+
+.message{
+    font-family: var(--items-font);
+    font-size:1.3em;
+    padding:10px 0;
+}

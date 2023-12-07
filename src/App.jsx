@@ -8,6 +8,7 @@ export function App(){
         e.preventDefault();
         const gift=e.target[0].value;
         addGift(gift);
+        e.target[0].value="";
     }
     return (
         <main>
@@ -31,6 +32,9 @@ export function App(){
                         <span className="button-content">Agregar</span>
                     </button>
                 </form>
+                {gifts.length === 0 &&
+                    <p className="message">No seas Grinch y agregate un regalo! 🎄</p>
+                }
                 {gifts.length > 0 && 
                     <button className="button deleteAllButton" onClick={deleteAllGifts}>
                         <span className="button-content">Eliminar todo</span>
