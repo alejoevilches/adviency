@@ -1,45 +1,31 @@
-import "./App.css";
 import { IconTrash } from "@tabler/icons-react";
+import "./App.css";
 import { useGifts } from "./hooks/useGifts";
 
 export function App(){
-    const {gifts, addGift, deleteGift, deleteAllGifts}=useGifts();
-    const handleAddButton=(e)=>{
-        e.preventDefault();
-        const gift=e.target[0].value;
-        addGift(gift);
-        e.target[0].value="";
-    }
+    const {gifts}=useGifts();
     return (
         <main>
             <section className="giftsContainer">
                 <h1>Regalos</h1>
                 <ul>
-                    {gifts.map((el)=>{
-                        return( 
-                        <article key={el}>
-                            <li>
-                                {el}
-                            </li>
-                            <button className="deleteButton" onClick={()=>deleteGift(el)}><IconTrash /></button>
-                        </article>
+                    {gifts.map(el=>{
+                        return (
+                            <article key={el}>
+                                <li>
+                                    <p>{el}</p>
+                                </li>
+                                <button className="deleteButton"><IconTrash /></button>
+                            </article>
                         )
                     })}
                 </ul>
-                <form onSubmit={handleAddButton}>
+                <form>
                     <input type="text" placeholder="Ingresá tu regalo" />
                     <button className="button">
                         <span className="button-content">Agregar</span>
                     </button>
                 </form>
-                {gifts.length === 0 &&
-                    <p className="message">No seas Grinch y agregate un regalo! 🎄</p>
-                }
-                {gifts.length > 0 && 
-                    <button className="button deleteAllButton" onClick={deleteAllGifts}>
-                        <span className="button-content">Eliminar todo</span>
-                    </button>
-                }
             </section>
         </main>
     )
