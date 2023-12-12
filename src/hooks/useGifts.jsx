@@ -1,11 +1,13 @@
 import { useState } from "react"
 
-export const useGifts=()=>{
-    const [gifts, setGifts]=useState(["Hola"]);
 
+export const useGifts=()=>{
+    const [gifts, setGifts]=useState([]);
     const addGift=(el)=>{
-        const newGiftList=[...gifts, el];
-        setGifts(newGiftList);
+        if (!gifts.some(gift=>el==gift) || gifts.length===0){
+            const newGiftList=[...gifts, el];
+            setGifts(newGiftList);
+        }
     }
 
     const deleteGift=(el)=>{
