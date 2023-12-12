@@ -44,3 +44,7 @@
 .button:hover {
   color: white; 
 }
+
+#qty{
+  width:40px;
+}
