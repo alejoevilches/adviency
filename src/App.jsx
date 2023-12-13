@@ -10,9 +10,12 @@ export function App(){
     const {modals, setModals}=useModals();
     const handleSubmit=(e)=>{
         e.preventDefault();
-        const gift=e.target[0].value;
-        if (gift==""){
-            return setModals({type:"emptyGift"})
+        const gift={
+            name:e.target[0].value,
+            qty:parseInt(e.target[1].value)
+        }
+        if (gift.name === "") {
+            return setModals({ type: "emptyGift" });
         }
         addToGifts(gift);
         e.target[0].value="";
@@ -24,9 +27,9 @@ export function App(){
                 <ul>
                     {gifts.map(el=>{
                         return (
-                        <article key={el}>
+                        <article key={el.name}>
                             <li>
-                                <p>{el}</p>
+                                <p>{el.name}</p><span> Cantidad: {el.qty}</span>
                             </li>
                             <button className="deleteButton" onClick={(el)=>deleteGift(el)}><IconTrash /></button>
                         </article>
@@ -35,7 +38,7 @@ export function App(){
                 </ul>
                 <form onSubmit={handleSubmit}>
                     <input type="text" placeholder="Ingresá tu regalo" />
-                    <input type="number" name="qty" id="qty" />
+                    <input type="number" name="qty" id="qty" min={1} defaultValue={1}/>
                     <button className="button">
                         <span className="button-content">Agregar</span>
                     </button>
