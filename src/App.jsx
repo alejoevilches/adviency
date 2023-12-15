@@ -1,23 +1,24 @@
 import { IconGift, IconTrash } from "@tabler/icons-react";
 import "./App.css";
 import { useGifts } from "./hooks/useGifts";
-import { useModals } from "./hooks/useModals";
+import { useModal } from "./hooks/useModal";
 import { Modal } from "./components/Modal";
 
 export function App(){
     const {gifts, addToGifts, deleteGift, deleteAllGifts}=useGifts();
-    const {modals, setModals, toggle}=useModals();
+    const {modals, setModals}=useModal();
+
     const handleSubmit=(e)=>{
         e.preventDefault();
         const data=new FormData(e.target);
         if (data.get("name")==""){
             return setModals({type:"emptyGift"})
         }
-        const gift={
+        addToGifts({
             name:data.get("name"),
+            link:data.get("link"),
             qty:parseInt(data.get("qty"))
-        }
-        addToGifts(gift);
+        })
         e.target.reset();
     }
     return (
@@ -32,29 +33,32 @@ export function App(){
                                     <p>{el.name}</p>
                                     <p>Cantidad: {el.qty}</p>
                                 </li>
-                                <button className="deleteButton" onClick={()=>deleteGift(el)}><IconTrash/></button>
+                                <button className="deleteButton" onClick={()=>deleteGift(el)}><IconTrash /></button>
                             </article>
                         )
                     })}
+                    <form onSubmit={handleSubmit}>
+                        <input type="text" name="name" id="name" placeholder="Ingresá tu regalo acá"/>
+                        <input type="text" name="link" id="link" placeholder="Link de una foto"/>
+                        <input type="number" name="qty" id="qty" defaultValue={1}/>
+                        <button className="button">
+                            <span className="button-content">Agregar</span>
+                        </button>
+                    </form>
                 </ul>
-                <form onSubmit={handleSubmit}>
-                    <input type="text" name="name" id="name" placeholder="Ingresá tu regalo"/>
-                    <input type="number" name="qty" id="qty" defaultValue={1}/>
-                    <button className="button">
-                        <span className="button-content">Agregar</span>
-                    </button>
-                </form>
-                {gifts.length==0 && <p className="message">No seas Grinch y agregate un regalo! 🎄</p>}
                 {gifts.length>0 &&
                     <button className="deleteAllButton button" onClick={deleteAllGifts}>
                         <span className="button-content">Eliminar todo</span>
                     </button>
                 }
+                {gifts.length==0 &&
+                    <p className="message">No seas Grinch y agregate un regalo! 🎄</p>
+                }
             </section>
             {modals.type=="emptyGift" &&
-                <Modal onClick>
-                    <p>Debes ingresar un regalo. Sino Papa Noel no sabrá que regalarte!</p>
-                    <button className="button" onClick={toggle}>
+                <Modal>
+                    <h2>No podes agregar un regalo vacio. Asi Papa Noel no va a saber que regalarte!</h2>
+                    <button className="button" onClick={()=>setModals({type:null})}>
                         <span className="button-content">Aceptar</span>
                     </button>
                 </Modal>
