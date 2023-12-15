@@ -1,7 +1,9 @@
 import { useState } from "react"
 
-const useModals=()=>{
+export const useModals=()=>{
     const [modals, setModals]=useState({type:null})
-
-    return {modals}
+    const toggle=()=>{
+        setModals({type:null})
+    };
+    return {modals, setModals, toggle}
 }

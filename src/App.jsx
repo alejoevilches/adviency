@@ -1,15 +1,21 @@
 import { IconGift, IconTrash } from "@tabler/icons-react";
 import "./App.css";
 import { useGifts } from "./hooks/useGifts";
+import { useModals } from "./hooks/useModals";
+import { Modal } from "./components/Modal";
 
 export function App(){
     const {gifts, addToGifts, deleteGift, deleteAllGifts}=useGifts();
+    const {modals, setModals, toggle}=useModals();
     const handleSubmit=(e)=>{
         e.preventDefault();
         const data=new FormData(e.target);
+        if (data.get("name")==""){
+            return setModals({type:"emptyGift"})
+        }
         const gift={
             name:data.get("name"),
-            qty:data.get("qty")
+            qty:parseInt(data.get("qty"))
         }
         addToGifts(gift);
         e.target.reset();
@@ -45,6 +51,14 @@ export function App(){
                     </button>
                 }
             </section>
+            {modals.type=="emptyGift" &&
+                <Modal onClick>
+                    <p>Debes ingresar un regalo. Sino Papa Noel no sabrá que regalarte!</p>
+                    <button className="button" onClick={toggle}>
+                        <span className="button-content">Aceptar</span>
+                    </button>
+                </Modal>
+            }
         </main>
     )
 }

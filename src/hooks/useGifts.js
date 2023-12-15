@@ -4,6 +4,12 @@ export const useGifts=()=>{
     const [gifts, setGifts]=useState([]);
 
     const addToGifts=(el)=>{
+        if (gifts.some(gift=>gift.name==el.name)){
+            const i=gifts.findIndex(gift=>el.name==gift.name);
+            const newGiftList=structuredClone(gifts);
+            newGiftList[i].qty+=el.qty;
+            return setGifts(newGiftList);
+        }
         const newGiftList=[...gifts, el];
         setGifts(newGiftList);
     }
@@ -15,7 +21,7 @@ export const useGifts=()=>{
         setGifts(newGiftList);
     }
 
-    const deleteAllGifts=(el)=>{
+    const deleteAllGifts=()=>{
         setGifts([]);
     }
 
