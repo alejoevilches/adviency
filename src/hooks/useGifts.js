@@ -1,7 +1,14 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 export const useGifts=()=>{
-    const [gifts, setGifts]=useState([]);
+    const loadGiftsFromLocalStorage=()=>{
+        const data=localStorage.getItem("giftlist");
+        return data 
+            ? JSON.parse(data)
+            : []
+    }
+
+    const [gifts, setGifts]=useState(loadGiftsFromLocalStorage());
 
     const addToGifts=(el)=>{
         if (gifts.some(gift=>gift.name==el.name)){
@@ -24,6 +31,10 @@ export const useGifts=()=>{
     const deleteAllGifts=()=>{
         setGifts([]);
     }
+
+    useEffect(()=>{
+        localStorage.setItem("giftlist", JSON.stringify(gifts))
+    },[gifts]);
 
     return {gifts, addToGifts, deleteGift, deleteAllGifts}
 }
