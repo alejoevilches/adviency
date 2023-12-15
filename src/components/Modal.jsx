@@ -9,3 +9,4 @@ export const Modal=({children})=>{
         </div>
     )
 }
+

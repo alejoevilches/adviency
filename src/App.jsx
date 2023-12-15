@@ -32,7 +32,7 @@ export function App(){
                                     <p>{el.name}</p>
                                     <p>Cantidad: {el.qty}</p>
                                 </li>
-                                <button className="deleteButton" onClick={(el)=>deleteGift(el)}><IconTrash/></button>
+                                <button className="deleteButton" onClick={()=>deleteGift(el)}><IconTrash/></button>
                             </article>
                         )
                     })}
