@@ -30,6 +30,9 @@ export function App(){
                         return (
                             <article key={el.name}>
                                 <li>
+                                    <div className="infoContainer">
+                                        <img src={el.link} alt={el.name} />
+                                    </div>
                                     <p>{el.name}</p>
                                     <p>Cantidad: {el.qty}</p>
                                 </li>

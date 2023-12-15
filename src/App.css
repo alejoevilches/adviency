@@ -27,20 +27,39 @@ main{
 }
 
 .giftsContainer li{
-    list-style-image:url(/public/icon.png);
+    list-style-type: none;
     font-family: var(--items-font);
     padding:5px 0;
     font-size: 1.5em;
+    display:flex;
+    flex-direction: row;
+    align-items: center;
+    gap:30px;
+}
+
+.infoContainer{
+    width:max-content;
+    display:inherit;
+    flex-direction: column;
+}
+
+.infoContainer img{
+    width:50px;
 }
 
 article{
     display:flex;
-    width:250px;
+    width:100%;
     justify-content: space-between;
+    gap:20px;
 }
 
 article > button:hover {
     color:red;
+}
+
+article p{
+    width: 100px;
 }
 
 .deleteButton{
