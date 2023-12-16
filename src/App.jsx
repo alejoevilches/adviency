@@ -3,6 +3,7 @@ import "./App.css";
 import { useGifts } from "./hooks/useGifts";
 import { useModal } from "./hooks/useModal";
 import { Modal } from "./components/Modal";
+import { Chip } from "./components/Chip";
 
 export function App(){
     const {gifts, addToGifts, deleteGift, deleteAllGifts}=useGifts();
@@ -14,9 +15,12 @@ export function App(){
         if (data.get("name")==""){
             return setModals({type:"emptyGift"})
         }
+        const img=data.get("link") 
+            ? data.get("link")
+            : "https://blog.homedepot.com.mx/wp-content/uploads/2021/12/ideasderegalo1.jpg"
         addToGifts({
             name:data.get("name"),
-            link:data.get("link"),
+            link:img,
             qty:parseInt(data.get("qty"))
         })
         e.target.reset();
@@ -28,16 +32,7 @@ export function App(){
                 <ul>
                     {gifts.map(el=>{
                         return (
-                            <article key={el.name}>
-                                <li>
-                                    <div className="infoContainer">
-                                        <img src={el.link} alt={el.name} />
-                                    </div>
-                                    <p>{el.name}</p>
-                                    <p>Cantidad: {el.qty}</p>
-                                </li>
-                                <button className="deleteButton" onClick={()=>deleteGift(el)}><IconTrash /></button>
-                            </article>
+                            <Chip el={el} key={el.name} />
                         )
                     })}
                     <form onSubmit={handleSubmit}>
