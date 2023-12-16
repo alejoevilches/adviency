@@ -1,0 +1,21 @@
+@import url(/src/index.css);
+
+.leftSideChip{
+    display:flex;
+    flex-direction: row;
+    align-items: center;
+    gap:10px;
+}
+
+.chipInfo{
+    display:inherit;
+    flex-direction: column;
+    gap:10px;
+    font-family: var(--items-font);
+    font-size: 1.3em;
+}
+
+.deleteButton:hover{
+    cursor: pointer;
+    color:red;
+}

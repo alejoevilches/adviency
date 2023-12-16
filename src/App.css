@@ -35,27 +35,9 @@ main{
     margin:10px 0;
 }
 
-.giftsContainer button:hover{
-    color:red;
-}
 
 .giftsContainer img{
     width:100px;
-}
-
-.leftSideChip{
-    display:flex;
-    flex-direction: row;
-    align-items: center;
-    gap:10px;
-}
-
-.chipInfo{
-    display:inherit;
-    flex-direction: column;
-    gap:10px;
-    font-family: var(--items-font);
-    font-size: 1.3em;
 }
 
 
@@ -88,7 +70,6 @@ form input{
     border:none;
     padding-left:10px;
 }
-
 
 .message{
     font-family: var(--items-font);
