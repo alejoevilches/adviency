@@ -6,10 +6,11 @@ import { useGiftsStore } from "../store/useGiftsStore"
 
 export function Chip({el}){
     const deleteGift=useGiftsStore(state=>state.deleteGift);
+    console.log(el.link);
     return (
         <li>
             <div className="leftSideChip">
-                <img src={el.link} alt={el.name} />
+                <img src={el.img} alt={el.name} />
                 <div className="chipInfo">
                     <p>{el.name}</p>
                     <p>Cantidad: {el.qty}</p>
