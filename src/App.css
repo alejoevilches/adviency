@@ -25,19 +25,7 @@ main{
 .giftsContainer h1{
     font-family: var(--title-font);
     font-size: 2.5em;
-}
-
-.giftsContainer li{
-    display:flex;
-    justify-content: space-between;
-    width:100%;
-    list-style-type: none;
-    margin:10px 0;
-}
-
-
-.giftsContainer img{
-    width:100px;
+    padding-bottom:10px;
 }
 
 

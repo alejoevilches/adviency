@@ -1,0 +1,21 @@
+@import url(/src/index.css);
+
+form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap:10px;
+}
+
+form input{
+    border-radius: 10px;
+    border:none;
+    padding-left:10px;
+    width:200px;
+    height: 20px;
+}
+
+.giftModalTitle{
+    font-family: var(--title-font);
+    font-size: 2em;
+}
