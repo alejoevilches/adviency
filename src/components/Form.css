@@ -5,6 +5,7 @@ form{
     flex-direction: column;
     align-items: center;
     gap:10px;
+    z-index: 2;
 }
 
 form input{

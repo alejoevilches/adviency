@@ -23,7 +23,7 @@ export const useGiftsStore=create((set)=>{
         })
     }
 
-    const deleteToGifts=(el)=>{
+    const deleteGift=(el)=>{
         set((state)=>{
             const {gifts}=state;
             const i=gifts.findIndex(gift=>gift.name==el.name);
@@ -39,5 +39,23 @@ export const useGiftsStore=create((set)=>{
         })
     }
 
-    return {gifts, addToGifts, deleteToGifts, deleteAllGifts};
+    const editGift=(el)=>{
+        set((state)=>{
+            const {gifts}=state;
+            const i=gifts.findIndex(gift=>gift.id==el.id);
+            const newGiftList=structuredClone(gifts);
+            const img=el.img!=""
+                ? el.img
+                : "public/defaultgiftpic.jpeg"
+            newGiftList[i]={
+                name:el.name,
+                qty:parseInt(el.qty),
+                img: img,
+                destination:el.destination
+            }
+            return {gifts:newGiftList}
+        })
+    }
+
+    return {gifts, addToGifts, deleteGift, deleteAllGifts, editGift};
 })

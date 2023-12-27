@@ -37,6 +37,7 @@ main{
 
 .deleteAllButton{
     margin-bottom:10px;
+    z-index:0;
 }
 
 .deleteAllButton::before{
