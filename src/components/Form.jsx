@@ -1,17 +1,17 @@
 /* eslint-disable react/prop-types */
-import { Modal } from "./Modal"
-import "./Form.css";
-import { useGiftsStore } from "../store/useGiftsStore";
 import { useState } from "react";
+import { useGiftsStore } from "../store/useGiftsStore";
+import "./Form.css";
+import { Modal } from "./Modal";
 
-export function Form({closeModal, children, editMode}){
-    const [emptyGiftModal, setEmptyGiftModal]=useState(false);
+export function Form({closeModal, editMode}){
     const {addToGifts, editGift}=useGiftsStore();
+    const [emptyGiftModal, setEmptyGiftModal]=useState(false);
     const handleSubmit=(e)=>{
         e.preventDefault();
         const data=new FormData(e.target);
-        const img=data.get("link")
-            ? data.get("link")
+        const img=data.get("img")
+            ? data.get("img")
             : "public/defaultgiftpic.jpeg"
         if (data.get("name")==""){
             return setEmptyGiftModal(true);
@@ -24,13 +24,11 @@ export function Form({closeModal, children, editMode}){
         }
         editMode
             ? editGift(gift)
-            : addToGifts(gift);
+            : addToGifts(gift)
         closeModal();
     }
-        
     return (
         <Modal>
-            {children}
             <form onSubmit={handleSubmit}>
                 <input type="text" name="name" id="name" placeholder="Ingresá tu regalo" />
                 <input type="text" name="link" id="link" placeholder="Foto del regalo" />

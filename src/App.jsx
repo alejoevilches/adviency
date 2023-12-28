@@ -4,43 +4,44 @@ import { Chip } from "./components/Chip";
 import { useEffect, useState } from "react";
 import { Form } from "./components/Form";
 
-export function App(){
+
+export function App(){   
     const {gifts, deleteAllGifts}=useGiftsStore();
-    const [addGiftModal, setAddGiftModal]=useState(false);
-    const closeModal=()=>{
-        setAddGiftModal(false);
+    const [addModal, setAddModal]=useState(false);
+    const handleAddModal=()=>{
+        setAddModal(false);
     }
+
     useEffect(()=>{
-        localStorage.setItem("gifts", JSON.stringify(gifts))
-    }, [gifts]);    
+        localStorage.setItem("gifts",JSON.stringify(gifts))
+    },[gifts]);
+
     return (
         <main>
             <section className="giftsContainer">
                 <h1>Regalos</h1>
-                <button className="button" onClick={()=>setAddGiftModal(true)}>
+                <button tabIndex={0} className="button" onClick={()=>setAddModal(true)}>
                     <span className="button-content">Agregar regalo</span>
                 </button>
                 <ul>
                     {gifts.map(el=>{
                         return (
-                            <Chip key={el.name} el={el} />
+                            <Chip key={el.id} el={el} />
                         )
                     })}
                 </ul>
             {gifts.length==0 &&
-            <p className="message">No seas Grinch y agregate un regalo! 🎄</p>        
+                <p className="message">No seas Grinch y agregate un regalo! 🎄</p> 
             }
             {gifts.length>0 &&
                 <button className="deleteAllButton button" onClick={deleteAllGifts}>
-                    <span className="button-content">Eliminar todos</span>
+                    <span className="button-content" tabIndex={2}>Eliminar todos</span>
                 </button>
             }
-            {addGiftModal &&
-                <Form closeModal={closeModal}>
-                    <h2 className="giftModalTitle">Agregá tu regalo</h2>
-                </Form>
-            }
             </section>
-        </main>
+            {addModal &&
+                <Form closeModal={handleAddModal}/>
+            }
+        </main> 
     )
 }
