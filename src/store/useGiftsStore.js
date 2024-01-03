@@ -43,15 +43,18 @@ export const useGiftsStore=create((set)=>{
         set({gifts:[]})
     }
 
-    const editGift=(el)=>{
+    const editGift=(el, id)=>{
         set((state)=>{
             const {gifts}=state;
-            const i=gifts.findIndex(gift=>gift.id==el.id);
+            const i=gifts.findIndex(gift=>gift.id==id);
             const newGiftList=structuredClone(gifts);
+            const giftId=id;
+            console.log(giftId);
             const img=el.img!=""
                 ? el.img
                 : "public/defaultgiftpic.jpeg"
             newGiftList[i]={
+                id:giftId,
                 name:el.name,
                 qty:parseInt(el.qty),
                 img: img,

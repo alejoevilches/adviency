@@ -14,6 +14,7 @@ export function App(){
 
     useEffect(()=>{
         localStorage.setItem("gifts",JSON.stringify(gifts))
+        console.log(gifts);
     },[gifts]);
 
     return (
@@ -34,8 +35,8 @@ export function App(){
                 <p className="message">No seas Grinch y agregate un regalo! 🎄</p> 
             }
             {gifts.length>0 &&
-                <button className="deleteAllButton button" onClick={deleteAllGifts}>
-                    <span className="button-content" tabIndex={2}>Eliminar todos</span>
+                <button tabIndex={0} className="deleteAllButton button" onClick={deleteAllGifts}>
+                    <span className="button-content">Eliminar todos</span>
                 </button>
             }
             </section>

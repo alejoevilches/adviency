@@ -1,19 +1,19 @@
 /* eslint-disable react/prop-types */
-import { IconTrash, IconEdit } from "@tabler/icons-react"
-import { useGiftsStore } from "../store/useGiftsStore"
+import { IconTrash } from "@tabler/icons-react";
+import { IconEdit } from "@tabler/icons-react";
 import { useState } from "react";
+import { useGiftsStore } from "../store/useGiftsStore";
 import { Form } from "./Form";
 import "./Chip.css";
 
 export function Chip({el}){
-    const {deleteGift, editGift}=useGiftsStore();
     const [editMode, setEditMode]=useState(false);
-    const closeEditModal=()=>{
+    const {deleteGift}=useGiftsStore();
+    const handleCloseModal=()=>{
         setEditMode(false);
     }
-    const handleEditMode=(el)=>{
+    const handleEdit=()=>{
         setEditMode(true);
-        editGift(el)
     }
     return (
         <li>
@@ -25,20 +25,13 @@ export function Chip({el}){
                     <p>Destinatario: {el.destination}</p>
                 </div>
             </div>
-                <div className="buttonContainer">
-                    <button 
-                        className="deleteButton" 
-                        onClick={()=>deleteGift(el)}
-                        tabIndex={1}>
-                        <IconTrash/>
-                    </button>
-                    <IconEdit 
-                        className="iconEdit" 
-                        onClick={()=>handleEditMode(el)}
-                        tabIndex={1} />
-                </div>
-            {editMode && 
-                <Form closeModal={closeEditModal} editMode={editMode} />
+            <section className="buttonContainer">
+                <button tabIndex={2} className="deleteButton" onClick={()=>deleteGift(el)}><IconTrash /></button>
+                <IconEdit tabIndex={2} className="iconEdit" onClick={handleEdit} />
+            </section>
+            
+            {editMode &&
+                <Form closeModal={handleCloseModal} id={el.id}/>
             }
         </li>
     )
