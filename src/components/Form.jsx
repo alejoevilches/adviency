@@ -1,37 +1,39 @@
 /* eslint-disable react/prop-types */
 import { useState } from "react";
 import { useGiftsStore } from "../store/useGiftsStore";
-import "./Form.css";
-import { Modal } from "./Modal";
 import { useFetch } from "../hooks/useFetch";
+import { Modal } from "./Modal";
+import "./Form.css";
 
 export function Form({closeModal, id}){
-    const {addToGifts, editGift}=useGiftsStore();
-    const {giftsSuggest}=useFetch("./src/mocks/giftsSuggest.json")
     const [emptyGiftModal, setEmptyGiftModal]=useState(false);
-    const generateRandomGift=(e)=>{
-        e.preventDefault()
-        const i=Math.floor(Math.random() * (100 - 0 + 1)) + 0;
+    const {data:giftIdeas}=useFetch("./src/mocks/giftsSuggest.json");
+    const {addToGifts, editGifts}=useGiftsStore();
+
+    const generateRandomGift=()=>{
+        const i=Math.floor(Math.random() * (111 - 0 + 1)) + 0;
         const nameInput=document.getElementById("name");
-        return nameInput.value=giftsSuggest[i];
+        return nameInput.value=giftIdeas[i];
     }
+
     const handleSubmit=(e)=>{
         e.preventDefault();
         const data=new FormData(e.target);
-        const img=data.get("link")
-            ? data.get("link")
-            : "public/defaultgiftpic.jpeg"
+        const img=data.get("img")
+            ? data.get("img")
+            : "public/defaultgiftpic.jpeg";
         if (data.get("name")==""){
             return setEmptyGiftModal(true);
         }
         const gift={
             name:data.get("name"),
-            img:img,
             qty:parseInt(data.get("qty")),
-            destination:data.get("destination")
+            destination:data.get("destination"),
+            img:img,
+            value:parseInt(data.get("value")*data.get("qty"))
         }
         if (id){
-            editGift(gift, id);
+            editGifts(gift, id)
             return closeModal();
         }
         addToGifts(gift);
@@ -43,13 +45,14 @@ export function Form({closeModal, id}){
                 <>
                     <input type="text" name="name" id="name" placeholder="Ingresá tu regalo" />
                     <button className="button" type="button" onClick={generateRandomGift}>
-                        <span className="button-content">Sorprendeme</span>
+                        <span className="button-content">Regalo aleatorio</span>
                     </button>
                 </>
-                <input type="text" name="link" id="link" placeholder="Foto del regalo" />
+                <input type="text" name="img" id="img" placeholder="Imagen del regalo"/>
                 <input type="number" name="qty" id="qty" min={1} defaultValue={1} />
-                <input type="text" name="destination" id="destination" placeholder="Para quien es este regalo?" />
-                <button className="button">
+                <input type="number" name="value" id="value" placeholder="Precio" />
+                <input type="text" name="destination" id="destination" placeholder="¿Para quien es el regalo?" />
+                <button className="button" type="submit">
                     <span className="button-content">Agregar regalo</span>
                 </button>
             </form>

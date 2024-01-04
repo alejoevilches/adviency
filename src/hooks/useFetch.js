@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react"
 
 export const useFetch=(url)=>{
-    const [giftsSuggest, setGiftsSuggest]=useState(null);
+    const [data, setData]=useState(null);
     useEffect(()=>{
         fetch(url)
             .then(res=>res.json())
-            .then(data=>setGiftsSuggest(data))
+            .then(data=>setData(data))
     })
-    return {giftsSuggest};
+
+    return {data}
 }
