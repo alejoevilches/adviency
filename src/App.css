@@ -53,3 +53,17 @@ main{
     font-size:1.3em;
     padding:10px 0;
 }
+
+.isGiftsInfo{
+    border-top:0.1px solid black;
+    text-align: center;
+    display:inherit;
+    flex-direction: column;
+    gap:10px;
+}
+
+.total{
+    width:100%;
+    font-family:var(--items-font);
+    font-size:1.3em;
+}

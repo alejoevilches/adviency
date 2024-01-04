@@ -1,6 +1,6 @@
-import "./Modal.css";
+/* eslint-disable react/prop-types */
+import "./Modal.css"
 
-// eslint-disable-next-line react/prop-types
 export function Modal({children}){
     return (
         <div className="modalOverlay">

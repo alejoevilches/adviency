@@ -1,13 +1,12 @@
-import { create } from "zustand";
+import { create } from "zustand"
 import { v4 as uuid } from "uuid";
 
 export const useGiftsStore=create((set)=>{
     const getGiftsFromLocalStorage=()=>{
         const storedGifts=localStorage.getItem("gifts");
-        console.log(storedGifts);
         return storedGifts
             ? JSON.parse(storedGifts)
-            : [];
+            : []
     }
 
     const gifts=getGiftsFromLocalStorage();
@@ -18,8 +17,8 @@ export const useGiftsStore=create((set)=>{
             const i=gifts.findIndex(gift=>gift.id==el.id);
             if (i!=-1 && gifts[i].destination==el.destination){
                 const newGiftList=structuredClone(gifts);
-                gifts[i].qty+=el.qty
-                return {gifts: newGiftList}
+                newGiftList[i].qty+=el.qty;
+                return {gifts:newGiftList}
             }
             const newGiftList=[...gifts, {
                 ...el,
@@ -35,7 +34,7 @@ export const useGiftsStore=create((set)=>{
             const i=gifts.findIndex(gift=>gift.id==el.id);
             const newGiftList=structuredClone(gifts);
             newGiftList.splice(i,1);
-            return {gifts:newGiftList};
+            return {gifts:newGiftList}
         })
     }
 
@@ -43,19 +42,18 @@ export const useGiftsStore=create((set)=>{
         set({gifts:[]})
     }
 
-    const editGifts=(el, id)=>{
+    const editGift=(el, id)=>{
         set((state)=>{
             const {gifts}=state;
             const i=gifts.findIndex(gift=>gift.id==id);
-            console.log(i);
             const newGiftList=structuredClone(gifts);
             const img=el.img!=""
                 ? el.img
-                : "public/defaultgiftpic.jpeg";
+                : "public/defaultgiftpic.jpeg"
             newGiftList[i]={
-                id:id,
                 name:el.name,
                 qty:parseInt(el.qty),
+                price:parseInt(el.price*el.qty),
                 destination:el.destination,
                 img:img
             }
@@ -63,6 +61,5 @@ export const useGiftsStore=create((set)=>{
         })
     }
 
-
-    return {gifts, addToGifts, deleteGift, deleteAllGifts, editGifts}
+    return {gifts, addToGifts, deleteGift, deleteAllGifts, editGift}
 })
