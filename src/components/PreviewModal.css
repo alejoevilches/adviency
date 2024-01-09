@@ -1,0 +1,20 @@
+
+@import url(/src/index.css);
+
+.previewTitle{
+    font-family: var(--title-font);
+    font-size:2.4em;
+}
+
+.previewChip{
+    font-size:1.3em;
+    display:flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap:15px;
+}
+
+.imgContainer img{
+    width:120px;
+}

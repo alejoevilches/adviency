@@ -7,5 +7,6 @@ export const useFetch=(url)=>{
             .then(res=>res.json())
             .then(data=>setData(data))
     })
+
     return {data}
 }

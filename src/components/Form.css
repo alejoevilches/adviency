@@ -16,6 +16,10 @@ form input{
     height: 20px;
 }
 
+#qty{
+    width:100px;
+}
+
 .giftModalTitle{
     font-family: var(--title-font);
     font-size: 2em;

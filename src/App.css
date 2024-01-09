@@ -36,7 +36,6 @@ main{
 }
 
 .deleteAllButton{
-    margin-bottom:10px;
     z-index:0;
 }
 
@@ -66,4 +65,14 @@ main{
     width:100%;
     font-family:var(--items-font);
     font-size:1.3em;
+}
+
+.buttonContainer{
+    display:flex;
+    flex-direction: row;
+    margin: 10px 0;
+}
+
+.previewTitle{
+    font-family: var(--title-font);
 }

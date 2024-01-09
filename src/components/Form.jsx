@@ -1,12 +1,12 @@
 /* eslint-disable react/prop-types */
 import { useState } from "react";
-import { Modal } from "./Modal"
 import "./Form.css"
 import { useGiftsStore } from "../store/useGiftsStore";
 import { useFetch } from "../hooks/useFetch";
+import { Modal } from "./Modal";
 
-export function Form({closeModal, id}){
-    const {editGift, addToGifts}=useGiftsStore();
+export function Form({el, id, closeModal}){
+    const {addToGifts, editGift}=useGiftsStore()
     const [emptyGiftModal, setEmptyGiftModal]=useState(false);
     const {data:giftsIdeas}=useFetch("./src/mocks/giftsSuggest.json")
     const getRandomGift=()=>{
@@ -14,24 +14,24 @@ export function Form({closeModal, id}){
         nameInput.value=giftsIdeas[Math.floor(Math.random() * (111 - 0 + 1)) + 0];
     }
     const handleSubmit=(e)=>{
-        e.preventDefault();
+        e.preventDefault()
         const data=new FormData(e.target);
         const img=data.get("img")
             ? data.get("img")
             : "public/defaultgiftpic.jpeg";
         if (data.get("name")==""){
-            setEmptyGiftModal(true);
+            setEmptyGiftModal(true)
         }
         const gift={
             name:data.get("name"),
+            img:img, 
+            destination:data.get("destination"),
             qty:parseInt(data.get("qty")),
-            img:img,
-            price:parseInt(data.get("qty")*data.get("price")),
-            destination:data.get("destination")
+            price:parseInt(data.get("qty")*data.get("price"))
         }
         if (id){
             editGift(gift, id);
-            return closeModal();
+            return closeModal()
         }
         addToGifts(gift);
         closeModal();
@@ -40,16 +40,16 @@ export function Form({closeModal, id}){
         <Modal>
             <form onSubmit={handleSubmit}>
                 <>
-                    <input type="text" name="name" id="name" placeholder="Ingresá tu regalo" />
+                    <input type="text" name="name" id="name" placeholder="Ingresá el regalo" defaultValue={el ? el.name : ""} />
                     <button className="button" type="button" onClick={getRandomGift}>
                         <span className="button-content">Regalo aleatorio</span>
                     </button>
                 </>
-                <input type="text" id="img" name="img" placeholder="Foto del regalo"/>
-                <input type="number" name="qty" id="qty" min={1} defaultValue={1} />
-                <input type="number" name="price" id="price" placeholder="Ingresá el valor"/>
-                <input type="text" name="destination" id="destination" placeholder="¿Para quien es?" />
-                <button type="submit" className="button">
+                <input type="text" name="img" id="img" placeholder="Imagen del regalo" defaultValue={el && el.img!="public/defaultgiftpic.jpeg" ? el.img : ""} />
+                <input type="number" name="qty" id="qty" placeholder="Cant" defaultValue={el ? el.qty : 1} />
+                <input type="number" name="price" id="price" placeholder="Precio del regalo" defaultValue={el ? el.price : ""} />
+                <input type="text" name="destination" id="destination" placeholder="¿Para quien es el regalo?" defaultValue={el ? el.destination : ""} />
+                <button className="button" type="submit">
                     <span className="button-content">Agregar regalo</span>
                 </button>
             </form>

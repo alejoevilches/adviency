@@ -1,18 +1,16 @@
-/* eslint-disable react/prop-types */
-import { IconEdit, IconTrash } from "@tabler/icons-react"
-import "./Chip.css"
-import { useGiftsStore } from "../store/useGiftsStore"
+import { IconCopy, IconEdit } from "@tabler/icons-react";
+import { IconTrash } from "@tabler/icons-react";
+import { useGiftsStore } from "../store/useGiftsStore";
 import { useState } from "react";
 import { Form } from "./Form";
+import "./Chip.css";
 
+/* eslint-disable react/prop-types */
 export function Chip({el}){
     const {deleteGift}=useGiftsStore();
-    const [editModal, setEditModal]=useState(false);
-    const handleEdit=()=>{
-        setEditModal(true)
-    }
-    const closeEditModal=()=>{
-        setEditModal(false);
+    const [modalType, setModalType]=useState(null)
+    const handleCloseModal=()=>{
+        setModalType(null);
     }
     return (
         <li>
@@ -25,11 +23,15 @@ export function Chip({el}){
                 </div>
             </section>
             <section className="buttonContainer">
-                <IconTrash tabIndex={2} className="iconEdit" onClick={()=>deleteGift(el)} />
-                <IconEdit tabIndex={2} className="iconEdit" onClick={handleEdit} />
+                <IconTrash className="iconEdit" onClick={()=>deleteGift(el)} />
+                <IconEdit className="iconEdit" onClick={()=>setModalType("edit")} />
+                <IconCopy className="iconEdit" onClick={()=>setModalType("copy")}/>
             </section>
-        {editModal &&
-            <Form id={el.id} closeModal={closeEditModal} />
+        {modalType=="edit" &&
+            <Form id={el.id} closeModal={handleCloseModal} />
+        }
+        {modalType=="copy" &&
+            <Form el={el} closeModal={handleCloseModal} />
         }
         </li>
     )
