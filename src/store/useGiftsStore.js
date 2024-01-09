@@ -1,12 +1,12 @@
-import { create } from "zustand"
-import { v4 as uuid } from "uuid"
+import { create } from "zustand";
+import { v4 as uuid } from "uuid";
 
 export const useGiftsStore=create((set)=>{
     const getGiftsFromLocalStorage=()=>{
         const storedGifts=localStorage.getItem("gifts")
-        return storedGifts 
-        ? JSON.parse(storedGifts)
-        : []
+        return storedGifts
+            ? JSON.parse(storedGifts)
+            : []
     }
 
     const gifts=getGiftsFromLocalStorage();
@@ -17,8 +17,8 @@ export const useGiftsStore=create((set)=>{
             const i=gifts.findIndex(gift=>gift.id==el.id);
             if (i!=-1 && gifts[i].destination==el.destination){
                 const newGiftList=structuredClone(gifts);
-                newGiftList[i].qty+=el.qty
-                return {gifts:newGiftList}
+                newGiftList[i].qty+=el.qty;
+                return {gifts:newGiftList};
             }
             const newGiftList=[...gifts, {
                 id:uuid(),
@@ -31,21 +31,17 @@ export const useGiftsStore=create((set)=>{
     const deleteGift=(el)=>{
         set((state)=>{
             const {gifts}=state;
-            const i=gifts.findIndex(gift=>gift.id==el.gift)
+            const i=gifts.findIndex(gift=>gift.id==el.id);
             const newGiftList=structuredClone(gifts);
-            newGiftList.splice(i,1)
-            return {gifts:newGiftList}
+            newGiftList.splice(i,1);
+            return {gifts:newGiftList};
         })
-    }
-
-    const deleteAllGifts=()=>{
-        set({gifts:[]})
     }
 
     const editGift=(el, id)=>{
         set((state)=>{
             const {gifts}=state;
-            const i=gifts.findIndex(gift=>gift.id==id)
+            const i=gifts.findIndex(gift=>gift.id==id);
             const img=el.img
                 ? el.img
                 : "public/defaultgiftpic.jpeg"
@@ -62,5 +58,9 @@ export const useGiftsStore=create((set)=>{
         })
     }
 
-    return {gifts, addToGifts, deleteGift, deleteAllGifts, editGift}
+    const deleteAllGifts=()=>{
+        set({gifts:[]})
+    }
+
+    return {gifts, addToGifts, deleteGift, editGift, deleteAllGifts}
 })

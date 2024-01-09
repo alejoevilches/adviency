@@ -1,39 +1,39 @@
 /* eslint-disable react/prop-types */
 import { useState } from "react";
-import "./Form.css"
+import "./Form.css";
 import { useGiftsStore } from "../store/useGiftsStore";
 import { useFetch } from "../hooks/useFetch";
 import { Modal } from "./Modal";
 
 export function Form({el, id, closeModal}){
-    const {addToGifts, editGift}=useGiftsStore()
-    const [emptyGiftModal, setEmptyGiftModal]=useState(false);
+    const [emptyModal, setEmptyModal]=useState(false);
+    const {addToGifts, editGift}=useGiftsStore();
     const {data:giftsIdeas}=useFetch("./src/mocks/giftsSuggest.json")
     const getRandomGift=()=>{
         const nameInput=document.getElementById("name");
-        nameInput.value=giftsIdeas[Math.floor(Math.random() * (111 - 0 + 1)) + 0];
+        nameInput.value=giftsIdeas[Math.floor(Math.random() * (111 - 0 + 1)) + 0]
     }
     const handleSubmit=(e)=>{
-        e.preventDefault()
+        e.preventDefault();
         const data=new FormData(e.target);
+        if (data.get("name")==""){
+            return setEmptyModal(true)
+        }
         const img=data.get("img")
             ? data.get("img")
             : "public/defaultgiftpic.jpeg";
-        if (data.get("name")==""){
-            setEmptyGiftModal(true)
-        }
         const gift={
             name:data.get("name"),
-            img:img, 
+            img:img,
             destination:data.get("destination"),
             qty:parseInt(data.get("qty")),
-            price:parseInt(data.get("qty")*data.get("price"))
+            price:parseInt(data.get("price")*data.get("qty"))
         }
         if (id){
             editGift(gift, id);
-            return closeModal()
+            return closeModal();
         }
-        addToGifts(gift);
+        addToGifts(gift)
         closeModal();
     }
     return (
@@ -53,11 +53,11 @@ export function Form({el, id, closeModal}){
                     <span className="button-content">Agregar regalo</span>
                 </button>
             </form>
-            {emptyGiftModal &&
+            {emptyModal &&
                 <Modal>
                     <p>No podés agregar un regalo vacio! Papa Noel no sabrá que regalarte!</p>
                     <button className="button">
-                        <span className="button-content" onClick={()=>setEmptyGiftModal(false)}>Aceptar</span>
+                        <span className="button-content" onClick={()=>setEmptyModal(false)}>Aceptar</span>
                     </button>
                 </Modal>
             }

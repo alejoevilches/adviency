@@ -1,13 +1,16 @@
 /* eslint-disable react/prop-types */
-import { useGiftsStore } from "../store/useGiftsStore";
+import "./PreviewModal.css";
 import { Modal } from "./Modal";
-import "./PreviewModal.css"
+import { useGiftsStore } from "../store/useGiftsStore";
 
 export function PreviewModal({closeModal}){
     const {gifts}=useGiftsStore();
+    const printList=()=>{
+        window.print();
+    }
     return (
         <Modal>
-            <h1 className="previewTitle">Regalos para Navidad</h1>
+            <h1 className="previewTitle">Tus regalos de Navidad</h1>
             <ul>
                 {gifts.map(el=>{
                     return (
@@ -23,9 +26,14 @@ export function PreviewModal({closeModal}){
                     )
                 })}
             </ul>
-            <button className="deleteAllButton button" onClick={closeModal}>
-                <span className="button-content">Cerrar</span>
-            </button>
+            <section className="buttonContainer">
+                <button className="deleteAllButton button" onClick={closeModal}>
+                    <span className="button-content">Cerrar</span>
+                </button>
+                <button className="button" onClick={printList}>
+                    <span className="button-content">Imprimir</span>
+                </button>
+            </section>
         </Modal>
     )
 }

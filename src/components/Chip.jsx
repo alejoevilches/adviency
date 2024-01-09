@@ -1,14 +1,13 @@
-import { IconCopy, IconEdit } from "@tabler/icons-react";
-import { IconTrash } from "@tabler/icons-react";
-import { useGiftsStore } from "../store/useGiftsStore";
-import { useState } from "react";
-import { Form } from "./Form";
-import "./Chip.css";
-
 /* eslint-disable react/prop-types */
+import { useState } from "react"
+import "./Chip.css"
+import { IconTrash, IconEdit, IconCopy } from "@tabler/icons-react"
+import { useGiftsStore } from "../store/useGiftsStore"
+import { Form } from "./Form"
+
 export function Chip({el}){
-    const {deleteGift}=useGiftsStore();
     const [modalType, setModalType]=useState(null)
+    const {deleteGift}=useGiftsStore();
     const handleCloseModal=()=>{
         setModalType(null);
     }
