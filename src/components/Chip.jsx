@@ -1,16 +1,16 @@
-import { useState } from "react";
-import { useGiftsStore } from "../store/useGiftsStore"
-import { IconTrash, IconEdit, IconCopy } from "@tabler/icons-react";
-import { Form } from "./Form";
 import "./Chip.css"
+import { useGiftsStore } from "../store/useGiftsStore"
+import { Form } from "./Form";
+import { IconTrash, IconEdit , IconCopy} from "@tabler/icons-react";
+import { useState } from "react";
 
 /* eslint-disable react/prop-types */
 export function Chip({el}){
     const [modalType, setModalType]=useState(null);
-    const handleCloseModal=()=>{
-        setModalType(null);
-    }
     const {deleteGift}=useGiftsStore();
+    const handleCloseModal=()=>{
+        setModalType(null)
+    }
     return (
         <li>
             <section className="leftSideChip">

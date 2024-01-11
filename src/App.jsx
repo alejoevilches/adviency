@@ -1,31 +1,35 @@
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 import "./App.css";
-import { useGiftsStore } from "./store/useGiftsStore";
-import { Form } from "./components/Form";
-import { Chip } from "./components/Chip";
-import { PreviewModal } from "./components/PreviewModal";
 import { IconMusic, IconMusicOff } from "@tabler/icons-react";
+import { useGiftsStore } from "./store/useGiftsStore";
+import { Chip } from "./components/Chip";
+import { Form } from "./components/Form";
+import { PreviewModal } from "./components/PreviewModal";
+import Snowflakes from "magic-snowflakes";
 
 export function App(){
-    const [addModal, setAddModal]=useState(false);
     const [isMusic, setIsMusic]=useState(false);
+    const snowflakes=new Snowflakes({
+        color:"#ffffff",
+        count:25
+    });
+    const [addModal, setAddModal]=useState(false);
     const [previewMode, setPreviewMode]=useState(false);
     const handleClosePreview=()=>{
         setPreviewMode(false);
     }
     const {gifts, deleteAllGifts}=useGiftsStore();
-    useEffect(()=>{
-        localStorage.setItem("gifts", JSON.stringify(gifts))
-    },[gifts]);
-    useEffect(()=>{
-        const audio=document.getElementById("audio");
+    const handleMusic=()=>{
+        setIsMusic(!isMusic)
+        const audio=document.getElementById(audio);
         isMusic
             ? audio.play()
-            : audio.pause();
-    },[isMusic])
-    const handleMusic=()=>{
-        setIsMusic(!isMusic);
+            : audio.pause()
     }
+    useEffect(()=>{
+        localStorage.setItem("gifts", JSON.stringify(gifts))
+    }, [gifts]);
+    snowflakes.start();
     return (
         <main>
             <section className="giftsContainer">

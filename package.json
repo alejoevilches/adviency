@@ -12,6 +12,7 @@
   "dependencies": {
     "@tabler/core": "^1.0.0-beta20",
     "@tabler/icons-react": "^2.42.0",
+    "magic-snowflakes": "^6.3.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.20.1",
