@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
-import "./PreviewModal.css";
+import { useGiftsStore } from "../store/useGiftsStore"
 import { Modal } from "./Modal";
-import { useGiftsStore } from "../store/useGiftsStore";
+import "./PreviewModal.css";
 
 export function PreviewModal({closeModal}){
     const {gifts}=useGiftsStore();

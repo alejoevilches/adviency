@@ -1,14 +1,14 @@
 /* eslint-disable react/prop-types */
+import { useFetch } from "../hooks/useFetch";
+import { useGiftsStore } from "../store/useGiftsStore";
+import { Modal } from "./Modal"
 import { useState } from "react";
 import "./Form.css";
-import { useGiftsStore } from "../store/useGiftsStore";
-import { useFetch } from "../hooks/useFetch";
-import { Modal } from "./Modal";
 
-export function Form({el, id, closeModal}){
+export function Form ({id, el, closeModal}){
     const [emptyModal, setEmptyModal]=useState(false);
-    const {addToGifts, editGift}=useGiftsStore();
-    const {data:giftsIdeas}=useFetch("./src/mocks/giftsSuggest.json")
+    const {editGift, addToGifts}=useGiftsStore();
+    const {data:giftsIdeas}=useFetch("./src/mocks/giftsSuggest.json");
     const getRandomGift=()=>{
         const nameInput=document.getElementById("name");
         nameInput.value=giftsIdeas[Math.floor(Math.random() * (111 - 0 + 1)) + 0]
@@ -17,7 +17,7 @@ export function Form({el, id, closeModal}){
         e.preventDefault();
         const data=new FormData(e.target);
         if (data.get("name")==""){
-            return setEmptyModal(true)
+            return setEmptyModal(true);
         }
         const img=data.get("img")
             ? data.get("img")
@@ -25,15 +25,15 @@ export function Form({el, id, closeModal}){
         const gift={
             name:data.get("name"),
             img:img,
-            destination:data.get("destination"),
             qty:parseInt(data.get("qty")),
-            price:parseInt(data.get("price")*data.get("qty"))
+            price:parseInt(data.get("qty")*data.get("price")),
+            destination:data.get("destination")
         }
         if (id){
             editGift(gift, id);
             return closeModal();
         }
-        addToGifts(gift)
+        addToGifts(gift);
         closeModal();
     }
     return (
