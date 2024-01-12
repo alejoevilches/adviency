@@ -41,7 +41,7 @@ export function App(){
                     }
                 </header>
                 <audio autoPlay id="audio">
-                    <source src="./public/music/song.mp3" type="audio/mp3" />
+                    <source src="/public/music/song.mp3" type="audio/mp3" />
                 </audio>
                 <div className="content">
                     <button className="button" onClick={()=>setAddModal(true)}>
