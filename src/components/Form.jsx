@@ -8,7 +8,7 @@ import { useState } from "react";
 export function Form({el, id, closeModal}){
     const {editGift, addToGifts}=useGiftsStore();
     const [emptyModal, setEmptyModal]=useState(false);
-    const {data:giftsIdeas}=useFetch("/src/mocks/giftsSuggest.json");
+    const {data:giftsIdeas}=useFetch("/mocks/giftsSuggest.json");
     const getRandomGift=()=>{
         const nameInput=document.getElementById("name");
         nameInput.value=giftsIdeas[Math.floor(Math.random() * (111 - 0 + 1)) + 0];
