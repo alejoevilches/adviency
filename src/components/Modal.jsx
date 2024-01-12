@@ -1,4 +1,4 @@
-// eslint-disable-next-line react/prop-types
+/* eslint-disable react/prop-types */
 import "./Modal.css"
 
 export function Modal({children}){
