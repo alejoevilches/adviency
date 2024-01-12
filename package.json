@@ -10,9 +10,15 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@tabler/core": "^1.0.0-beta20",
+    "@tabler/icons-react": "^2.42.0",
+    "magic-snowflakes": "^6.3.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "standard": "^17.1.0"
+    "react-router-dom": "^6.20.1",
+    "standard": "^17.1.0",
+    "uuid": "^9.0.1",
+    "zustand": "^4.4.7"
   },
   "devDependencies": {
     "@types/react": "^18.2.37",
@@ -25,6 +31,6 @@
     "vite": "^5.0.0"
   },
   "eslintConfig": {
-    "extends":"./node_modules/standard/eslintrc.json"
+    "extends": "./node_modules/standard/eslintrc.json"
   }
 }

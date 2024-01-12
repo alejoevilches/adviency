@@ -1,5 +1,90 @@
+@import url(/src/index.css);
+@import url(./button.css);
+
 main{
     display:flex;
     flex-direction: column;
+    gap:20px;
+    min-height: 100vh;
+    align-items: center;
+    justify-content: center;
+}
+
+header{
+    display:flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+}
+
+.giftsContainer{
+    margin:200px;
+    width:550px;
+    height:max-content;
+    background-color: rgb(236, 197, 197);
+    border:1px solid white;
+    display:inherit;
+    flex-direction: column;
+    justify-content:space-between
+}
+
+.content{
+    display:inherit;
+    flex-direction: column;
+    align-items: center;
+}
+
+.giftsContainer h1{
+    font-family: var(--title-font);
+    font-size: 2.5em;
+    padding-bottom:10px;
+}
+
+
+.deleteButton{
+    background-color: transparent;
+    border:none;
+    margin-left:20px;
+}
+
+.deleteAllButton{
+    z-index:0;
+}
+
+.deleteAllButton::before{
+  background: linear-gradient(
+    82.3deg,
+    #780b0f,
+    #bb0c12
+  );
+}
+
+.message{
+    font-family: var(--items-font);
+    font-size:1.3em;
+    padding:10px 0;
+}
+
+.isGiftsInfo{
+    border-top:0.1px solid black;
+    text-align: center;
+    display:inherit;
+    flex-direction: column;
     gap:10px;
+}
+
+.total{
+    width:100%;
+    font-family:var(--items-font);
+    font-size:1.3em;
+}
+
+.buttonContainer{
+    display:flex;
+    flex-direction: row;
+    margin: 10px 0;
+}
+
+.previewTitle{
+    font-family: var(--title-font);
 }

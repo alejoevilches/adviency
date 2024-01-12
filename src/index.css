@@ -1,11 +1,25 @@
 *{
-    padding:0;
     margin:0;
+    padding:0;
+}
+
+@font-face {
+    font-family: "Titles";
+    src: url(/fonts/IndieFlower-Regular.ttf);
+}
+
+@font-face {
+    font-family: "Items";
+    src: url(/fonts/Dosis-VariableFont_wght.ttf);
+}
+
+:root{
+    --title-font:"Titles";
+    --items-font:"Items"
 }
 
 body{
-    display:flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+    height:100vh;
+    background-image: url(/public/background.avif);
+    background-size: cover;
 }
