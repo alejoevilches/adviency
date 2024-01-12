@@ -20,7 +20,7 @@ export function Form({el, id, closeModal}){
         }
         const img=data.get("img")
             ? data.get("img")
-            : "public/defaultgiftpic.jpeg";
+            : "./defaultgiftpic.jpeg";
         const gift={
             name:data.get("name"),
             img:img,
